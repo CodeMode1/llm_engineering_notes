@@ -199,7 +199,8 @@ Frontier models trained in two different ways, so they are:
 - Run the following pwsh commands to activate and run the Jupyter Lab environment (once installation setup is done):
 
   - venv\Scripts\activate
-  - jupyter lab (python application exe)
+  - jupyter lab
+    > (python application exe)
 
 - Run _ollama serve_ if Ollama is down.
 
