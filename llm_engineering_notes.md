@@ -63,7 +63,7 @@
 - Notes:
 
   In this course, we will run Ollama model locally on our machine by running OllamaSetup executable, available for download
-  on Ollama official website. Ollama has been trained with way less parameters than frontier models (10 000 x less). In the range of 100 000 vs
+  on Ollama official website. Ollama has been trained with way less parameters than frontier models. In the range of 100 000 vs
   trillion parameters for a frontier model. - **Try it**: ollama run llama3.2 or llama3.2:1b, as a faster alternative.
 
 ### 3. Skills and tools for AI development
