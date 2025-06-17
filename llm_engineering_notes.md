@@ -2,8 +2,6 @@
 
 ## 🗓️ Lecture Title: _Lecture Topic or Date_
 
----
-
 ## 🧠 Learning Objectives
 
 • **Build advanced Generative AI products** using cutting-edge models and frameworks.
@@ -29,8 +27,6 @@
 • **Deploy AI products to production** with polished user interfaces and advanced capabilities.
 
 • **Level up your AI and LLM engineering skills** to be at the forefront of the industry.
-
----
 
 ## 📝 Key Concepts
 
@@ -139,8 +135,6 @@ Offering you to choose between closed-source or open-source models.
 - Fine tuning an open source model
 - Gradio: build a nice sharp user interface very quickly
 - Agents to solve a real world case scenario
-
----
 
 ## Installation
 
