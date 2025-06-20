@@ -112,7 +112,7 @@ Techniques:
 
 **Three ways to use models**:
 
-1. Chat interfaces (like ChatGPT)
+1. Chat interfaces (like ChatGPT which currently uses GPT-3.5 Turbo)
 2. Cloud APIs (LLM API)
    Frameworks like LangChain
 
@@ -208,34 +208,60 @@ Frontier models trained in two different ways, so they are:
 **Examples of Frontier Models**:
 
 🧠 1. OpenAI
+
 These models are designed for cutting-edge reasoning, multimodal interaction, and general-purpose intelligence:
+
 GPT-4 – Flagship model known for strong reasoning and language capabilities.
+
 GPT-4 Turbo – Optimized version of GPT-4 for speed and cost.
+
 GPT-4o – Multimodal model (text, vision, audio) with real-time capabilities.
+
 o1-preview – Successor to GPT-4o in reasoning tasks; excels in math, science, and code 1.
 
+GPT-3.5 Turbo is not considered a frontier LLM:
+
+It is powerful for basic tasks, but not a frontier LLM.
+Frontier LLMs are models at the edge of current capabilities, and GPT-3.5 no longer qualifies.
+
 🧠 2. Google DeepMind
+
 DeepMind’s Gemini series is their frontier model family:
+
 Gemini 1.5 Pro – High-end model with strong reasoning and multimodal capabilities.
+
 Gemini 1.5 Flash – Optimized for speed and efficiency.
+
 Gemini 1.0 Ultra – Earlier frontier model with advanced capabilities2.
 
 🧠 3. Anthropic
+
 Anthropic’s Claude 3 family includes:
+
 Claude 3 Opus – Their most powerful and capable model; explicitly a frontier model.
+
 Claude 3 Sonnet – Mid-tier model, not explicitly frontier but still highly capable.
+
 Claude 3 Haiku – Lightweight, fast model for simpler tasks.
 
 🧠 4. Cohere
+
 Cohere focuses on enterprise and retrieval-augmented generation (RAG), with:
+
 Command R+ – Their most advanced model, optimized for RAG and enterprise use cases.
+
 Command R – Earlier version, still powerful for structured tasks.
+
 While not always labeled as "frontier" in the same way as OpenAI or DeepMind models, Command R+ is Cohere’s top-tier offering.
 
 🧠 5. Meta (Facebook AI)
+
 Meta’s LLaMA (Large Language Model Meta AI) series includes:
+
 LLaMA 3 70B – Their most capable open-weight model, considered frontier-level in open-source AI.
+
 LLaMA 2 70B – Previous generation, still widely used in research and industry.
+
 Meta positions these models as open frontier models, especially for academic and developer communities.
 
 **Example of generated output:**
