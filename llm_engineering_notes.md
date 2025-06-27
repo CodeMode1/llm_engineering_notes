@@ -193,6 +193,54 @@ Frontier models trained in two different ways, so they are:
 - user prompt
   - conversation itself
 
+## Limitations of frontier models
+- Specialized domains (most are not Phd level, but closing in). For example, Claude 3.5 Sonnet
+has surpassed Phd level in math, chemistry, physics.
+- Recent events (limited knowledge beyond training cut-off date)
+- Can confidently make mistakes (curious blindspots)
+
+## Comparing leading LLMs: strengths & business applications
+![alt text](image.png)
+
+OpenAI's o1 preview + Perplexity got this right. Many models are getting it wrong!
+Input is tokenized so the LLM cannot understand the meaning of letters inside the token.
+
+- GPT-4o: fast, intelligent, flexible
+- Claude 3.5 Sonnet: code, scientific LLM, broader socio-economic knowledge.
+- Claude 3 Opus
+- Gemini Pro 1.5
+- CommandR+
+- Meta AI (FE version of LLama): good with generation
+- Perplexity (search engine not LLM): test with current events with specific/detailed answer.
+
+- All 6 forntier LLMs are shockingly good!
+- Claude tends to be favored by practioners: more humorous, more attention to safety, more concise
+
+Differenciator: cost (as they converge in capability)
+
+## The Journey
+![alt text](image-1.png)
+- GPT store: experiment with tuning GPT LLMs
+- Agents: orchestrate LLMs
+
+## LLM Parameters (weights)
+![alt text](image-2.png)
+
+## LLM Tokens
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+
+## LLM Context Window
+![alt text](image-7.png)
+- Whole conversation so far (Input/Output tokens)
+
+- Question:
+Est-ce que le cached input fait parti du compte du context window?
+
+## One shot prompting
+
 ## 🧮 Useful commands
 
 - Run the following pwsh commands to activate and run the Jupyter Lab environment (once installation setup is done):
