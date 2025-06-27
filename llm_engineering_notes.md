@@ -241,6 +241,7 @@ Est-ce que le cached input fait parti du compte du context window?
 
 ## One shot prompting
 
+
 ## 🧮 Useful commands
 
 - Run the following pwsh commands to activate and run the Jupyter Lab environment (once installation setup is done):
