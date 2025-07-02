@@ -320,7 +320,7 @@ An **agent** is a software entity capable of autonomous action in a given enviro
 - An **assistant** focuses on understanding user intent and managing tasks through dialogue, often relying on other systems to actually perform actions.
 - An **agent** is built for autonomy, making decisions and acting in pursuit of goals, sometimes with limited or no direct human involvement.
 
-## Hugging face
+## Hugging Face
 ![alt text](image-19.png)
 ![alt text](image-20.png)
 
@@ -385,11 +385,22 @@ A lightweight library that makes it easier to train and run models on different 
 ![alt text](image-21.png)
 ![alt text](image-22.png)
 ![alt text](image-23.png)
+![alt text](image-24.png)
+![alt text](image-25.png)
+
+## Tokenizer
+Techniques in AI:
+AutoTokenizer with:
+- LLAMA 3.1 Model
+- PHI3 (Microsoft)
+- QWEN2 (Alibaba Cloud)
+- Starcoder2 (ServiceNow/HuggingFace/Nvidia)
+
+![alt text](image-26.png)
 
 ## Fine tuning
 
 ## Tensor Flow
-
 
 ## 🧮 Useful commands
 
