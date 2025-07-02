@@ -236,10 +236,34 @@ Differenciator: cost (as they converge in capability)
 ![alt text](image-7.png)
 - Whole conversation so far (Input/Output tokens)
 
-- Question:
+Question:
 Est-ce que le cached input fait parti du compte du context window?
 
-## One shot prompting
+Non, le « cached input » (ou les entrées mises en cache) **ne font pas directement partie du décompte de la context window** d’un modèle LLM comme ceux d’OpenAI.
+
+## Chatbots
+TODO
+
+## Assistant
+![alt text](image-9.png)
+![alt text](image-8.png)
+![alt text](image-10.png)
+![alt text](image-11.png) :
+User > assistant > user > tools (we call our tool function) > assistant
+![alt text](image-12.png)
+
+## One shot prompting/multi shot prompting
+
+### Key Differences
+- **One-shot:** Model gets **one** example before the task.
+- **Multi-shot:** Model sees **several** examples before the task.
+
+Both are part of _few-shot learning_ techniques used to guide LLM outputs.
+
+
+## Fine tuning
+
+## Tensor Flow
 
 
 ## 🧮 Useful commands
