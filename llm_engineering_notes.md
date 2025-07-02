@@ -388,7 +388,7 @@ A lightweight library that makes it easier to train and run models on different 
 ![alt text](image-24.png)
 ![alt text](image-25.png)
 
-## Open-Source Tokenizer
+## Hugging Face Tokenizers
 Techniques in AI:
 AutoTokenizer with:
 - LLAMA 3.1 Model
@@ -400,10 +400,10 @@ AutoTokenizer with:
 
 **TODO**: Inference tasks??
 
-## Open-Source Models
+## Hugging Face Models
 - Running inference on open-source models
 - Quantization (reducing weights of models)
-- Model internals (peek at py torch layers -> transformers)
+- Model internals (peek at PyTorch layers -> transformers)
 - Streaming
 ![alt text](image-27.png)
 
@@ -419,6 +419,8 @@ Library bits & bytes:
   - bnb_4bit_use_double_quant=true (quantizes twice)
   - bnb_4bit_compute_dtype=torch.bfloat16 (syntax for performance)
   - bnb_4bit_quant_type="nf4" (normalize the 4 bits)
+
+## Hugging Face Transformers
 
 ## Fine tuning
 
