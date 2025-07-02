@@ -93,7 +93,7 @@ Techniques:
 - Fine-tuning
 - Agentization
 
-### 4. Understanding Frontier models: GPT, Claude & Open Source LLMs
+### 4. Understanding Frontier models: GPT, Claude & Open-Source LLMs
 
 - Closed-Source Frontier:
 
@@ -137,7 +137,7 @@ Offering you to choose between closed-source or open-source models.
 
 - RAG - knowledge store to apply to LLMs
 - Fine tuning Frontier model
-- Fine tuning an open source model
+- Fine tuning an open-source model
 - Gradio: build a nice sharp user interface very quickly
 - Agents to solve a real world case scenario
 
@@ -388,7 +388,7 @@ A lightweight library that makes it easier to train and run models on different 
 ![alt text](image-24.png)
 ![alt text](image-25.png)
 
-## Tokenizer
+## Open-Source Tokenizer
 Techniques in AI:
 AutoTokenizer with:
 - LLAMA 3.1 Model
@@ -397,6 +397,17 @@ AutoTokenizer with:
 - Starcoder2 (ServiceNow/HuggingFace/Nvidia)
 
 ![alt text](image-26.png)
+
+**TODO**: Inference tasks??
+
+## Open-Source Models
+- Running inference on open-source models
+- Quantization (reducing weights of models)
+- Model internals (peek at py torch layers -> transformers)
+- Streaming
+
+![alt text](image-27.png)
+
 
 ## Fine tuning
 
@@ -441,7 +452,7 @@ Gemini 1.5 Pro – High-end model with strong reasoning and multimodal capabilit
 
 Gemini 1.5 Flash – Optimized for speed and efficiency.
 
-Gemini 1.0 Ultra – Earlier frontier model with advanced capabilities2.
+Gemini 1.0 Ultra – Earlier frontier model with advanced capabilities.
 
 🧠 3. Anthropic
 
