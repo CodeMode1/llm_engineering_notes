@@ -405,9 +405,20 @@ AutoTokenizer with:
 - Quantization (reducing weights of models)
 - Model internals (peek at py torch layers -> transformers)
 - Streaming
-
 ![alt text](image-27.png)
 
+Quantization:
+- Load the model into memory and reduce the precision of the weights which results in less memory used for these models in memory.
+- Normally 32 bits (4 bytes)
+- Can reduce to even 8 bit (1 byte), it does not reduce accuracy that much
+- Can reduce to even 4 bit (half byte), it does not reduce accuracy as much as we would think!!
+
+Library bits & bytes:
+- BitsAndBytesConfig
+  - load_in_4bits=true (loads 4 bits only in memory)
+  - bnb_4bit_use_double_quant=true (quantizes twice)
+  - bnb_4bit_compute_dtype=torch.bfloat16 (syntax for performance)
+  - bnb_4bit_quant_type="nf4" (normalize the 4 bits)
 
 ## Fine tuning
 
