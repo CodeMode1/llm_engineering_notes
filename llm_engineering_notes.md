@@ -242,15 +242,37 @@ Est-ce que le cached input fait parti du compte du context window?
 Non, le « cached input » (ou les entrées mises en cache) **ne font pas directement partie du décompte de la context window** d’un modèle LLM comme ceux d’OpenAI.
 
 ## Chatbots
-TODO
+![alt text](image-18.png)
 
 ## Assistant
 ![alt text](image-9.png)
 ![alt text](image-8.png)
+Tools
+Tools are an incredibly powerful feature provided by the frontier LLMs.
+
+With tools, you can write a function, and have the LLM call that function as part of its response.
 ![alt text](image-10.png)
 ![alt text](image-11.png) :
 User > assistant > user > tools (we call our tool function) > assistant
 ![alt text](image-12.png)
+
+Workflow:
+### Typical Workflow
+1. **User**: “What’s the weather in Paris?”
+2. **Assistant**: (Detects the need for weather info, sends a function call instruction for getWeather("Paris"))
+3. **Developer/Backend**: Executes the weather API call, sends result back to Assistant.
+4. **Assistant**: Formats a natural answer: “It’s 23°C and sunny in Paris today.”
+
+(AI chat assistant is not able to access live data or external APIs directly)
+
+or
+- (i.e., “If the payment fails, ask for a different card”).
+
+**In summary:**
+The Assistant acts as the brains and conductor.
+You (the developer/backend) handle the hands and feet, carrying out the external “actions.”
+This keeps your systems secure while leveraging the Assistant’s reasoning skills to create powerful, conversational interfaces.
+
 
 ## One shot prompting/multi shot prompting
 
@@ -260,6 +282,109 @@ User > assistant > user > tools (we call our tool function) > assistant
 
 Both are part of _few-shot learning_ techniques used to guide LLM outputs.
 
+## Agents
+![alt text](image-13.png)
+![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+![alt text](image-17.png)
+
+## Assistant
+**Definition:**
+An **assistant** in the context of AI or software is a system primarily designed for natural language interaction and task management. It specializes in handling conversations, guiding users through processes, suggesting actions, and can coordinate the use of various tools based on user requests.
+**Key Features:**
+- **Conversational:** Communicates with users using natural language.
+- **Tool-orchestration:** Can request or suggest actions, such as calling functions or accessing information sources—action execution is often handled by another component.
+- **Process Management:** Coordinates multi-step tasks or workflows based on user input.
+- **Memory:** Can reference previous conversation history to provide continuity.
+
+## Agent
+**Definition:**
+An **agent** is a software entity capable of autonomous action in a given environment to achieve specific goals. Agents can reason, plan, make decisions, and directly interact with other systems or environments to accomplish their objectives, often operating with minimal human oversight.
+**Key Features:**
+- **Autonomous:** Makes and executes decisions independently.
+- **Goal-oriented:** Acts to accomplish specified objectives, often optimizing for certain outcomes.
+- **Environment Interaction:** Senses and acts upon its environment or systems, sometimes in real time.
+- **Adaptivity:** May learn from new data or experiences to improve effectiveness.
+
+## Key Differences
+
+|  | Assistant | Agent |
+| --- | --- | --- |
+| **Primary Role** | Conversational coordination | Autonomous action |
+| **Action** | Requests or suggests actions | Directly executes actions |
+| **Supervision** | Often needs another component to act | Can operate independently |
+| **Task Scope** | Guides tasks through dialogue | Seeks to fulfill goals on its own |
+| **Examples** | Chatbots, virtual assistants | Automated trading bots, smart home controllers |
+**In summary:**
+- An **assistant** focuses on understanding user intent and managing tasks through dialogue, often relying on other systems to actually perform actions.
+- An **agent** is built for autonomy, making decisions and acting in pursuit of goals, sometimes with limited or no direct human involvement.
+
+## Hugging face
+![alt text](image-19.png)
+![alt text](image-20.png)
+
+Explanation of the concepts:
+
+## 1. **Hub**
+**What is it?**
+The **Hugging Face Hub** is an online platform and repository where users can share, discover, and download pre-trained models, datasets, and other machine learning resources.
+**Key points:**
+- Hosts thousands of public models and datasets.
+- Supports versioning, documentation, and community sharing.
+- Integrates seamlessly with Hugging Face libraries for easy access (`from_pretrained`, etc.).
+
+## 2. **Datasets**
+**What is it?**
+**Datasets** refers to both the Hugging Face [Datasets Library](https://huggingface.co/docs/datasets/index) and the datasets hosted on the Hub.
+**Key points:**
+- The library provides tools to load, preprocess, and manage datasets for NLP, computer vision, and more.
+- Supports efficient streaming and manipulation, even for massive datasets.
+- Integrates with popular ML frameworks (PyTorch, TensorFlow, JAX).
+
+## 3. **Transformers**
+**What is it?**
+A core [Transformers Library](https://huggingface.co/docs/transformers/index) for loading, using, and fine-tuning pre-trained transformer models (like BERT, GPT, T5, etc.) for many tasks: text, audio, vision, and multimodal.
+**Key points:**
+- Huge collection of pre-trained models with standard APIs.
+- Simplifies inference and training for a wide range of NLP and other tasks.
+- Supports PyTorch, TensorFlow, and JAX.
+
+## 4. **PEFT (Parameter-Efficient Fine-Tuning)**
+**What is it?**
+A library and suite of methods to fine-tune big models efficiently by updating only a small subset of parameters (using methods such as LoRA and prompt tuning).
+**Key points:**
+- Reduces resource cost for fine-tuning.
+- Enables adaptation of large models to new tasks with less data.
+
+## 5. **TRL (Transformers Reinforcement Learning)**
+**What is it?**
+A library for training and fine-tuning transformer models using reinforcement learning, especially with methods like RLHF (Reinforcement Learning from Human Feedback).
+**Key points:**
+- Used to “align” models with desired behaviors.
+- Facilitates advanced training workflows beyond standard supervised methods.
+
+## 6. **Accelerate**
+**What is it?**
+A lightweight library that makes it easier to train and run models on different hardware configurations (CPU, multi-GPU, TPU, etc.) with minimal code changes.
+**Key points:**
+- Automates device placement, mixed-precision, and distributed training.
+- Enables seamless scaling from local machines to large clusters.
+
+**Summary Table:**
+
+| Concept | What it is |
+| --- | --- |
+| Hub | Online repository for models and datasets |
+| Datasets | Library and resource for loading/managing datasets |
+| Transformers | Library for using and training transformer models |
+| PEFT | Toolkit for efficient fine-tuning of large models |
+| TRL | Library for RL-based training/fine-tuning of transformers |
+| Accelerate | Tool for easy, scalable hardware usage during training |
+
+![alt text](image-21.png)
+![alt text](image-22.png)
+![alt text](image-23.png)
 
 ## Fine tuning
 
