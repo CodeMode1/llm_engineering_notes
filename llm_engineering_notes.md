@@ -439,6 +439,42 @@ Note lab Week 3 Day 4 - models.ipynb:
 
 I've added some new material in the middle of this lab to get more intuition on what a Transformer actually is. Later in the course, when we fine-tune LLMs, you'll get a deeper understanding of this.
 
+## Looking under the hood at the Transformer model
+
+The next cell prints the HuggingFace model object for Llama.
+
+This model object is a Neural Network, implemented with the Python framework PyTorch. The Neural Network uses the architecture invented by Google scientists in 2017: the Transformer architecture.
+
+While we're not going to go deep into the theory, this is an opportunity to get some intuition for what the Transformer actually is.
+
+If you're completely new to Neural Networks, check out my YouTube intro playlist for the foundations.
+
+Now take a look at the layers of the Neural Network that get printed in the next cell. Look out for this:
+
+- It consists of layers
+- There's something called "embedding" - this takes tokens and turns them into 4,096 dimensional vectors. We'll learn more about this in Week 5.
+- There are then 32 sets of groups of layers called "Decoder layers". Each Decoder layer contains three types of layer: (a) self-attention layers (b) multi-layer perceptron (MLP) layers (c) batch norm layers.
+- There is an LM Head layer at the end; this produces the output
+Notice the mention that the model has been quantized to 4 bits.
+
+It's not required to go any deeper into the theory at this point, but if you'd like to, I've asked our mutual friend to take this printout and make a tutorial to walk through each layer. This also looks at the dimensions at each point.
+
+If you're interested, work through this tutorial after running the next cell:
+
+https://chatgpt.com/canvas/shared/680cbea6de688191a20f350a2293c76b
+
+## And if you want to go even deeper into Transformers
+
+In addition to looking at each of the layers in the model, you can actually look at the HuggingFace code that implements Llama using PyTorch.
+
+Here is the HuggingFace Transformers repo:
+https://github.com/huggingface/transformers
+
+And within this, here is the code for Llama 4:
+https://github.com/huggingface/transformers/blob/main/src/transformers/models/llama4/modeling_llama4.py
+
+Obviously it's not neceesary at all to get into this detail - the job of an AI engineer is to select, optimize, fine-tune and apply LLMs rather than to code a transformer in PyTorch. OpenAI, Meta and other frontier labs spent millions building and training these models. But it's a fascinating rabbit hole if you're interested!
+
 ## Instruct variants of models (Chat)
 
 Many models have a variant that has been trained for use in Chats.
@@ -456,6 +492,37 @@ messages = [
 
 prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 print(prompt)
+
+https://huggingface.co/docs/transformers/main/en/chat_templating#what-are-generation-prompts
+
+Example:
+
+**`add_generation_prompt`** controls whether special tokens should be added that **tell the model explicitly to start generating an answer**. Some models need it, some don't.
+- If you set it to `False`, the model gets the conversation "as is".
+- If you set it to `True`, the template prepares the messages so the model knows it's the assistant's turn to reply next.
+
+I'm using a HuggingFace utility called TextStreamer so that results stream back. To stream results, we simply replace:
+outputs = model.generate(inputs, max_new_tokens=80)
+With:
+streamer = TextStreamer(tokenizer)
+outputs = model.generate(inputs, max_new_tokens=80, streamer=streamer)
+
+Also I've added the argument add_generation_prompt=True to my call to create the Chat template. This ensures that Phi generates a response to the question, instead of just predicting how the user prompt continues. Try experimenting with setting this to False to see what happens.
+
+*Wrapping everything in a function - and adding Streaming and generation prompts*
+
+    def generate(model, messages):
+      tokenizer = AutoTokenizer.from_pretrained(model)
+      tokenizer.pad_token = tokenizer.eos_token
+      inputs = tokenizer.apply_chat_template(messages, return_tensors="pt", add_generation_prompt=True).to("cuda")
+      streamer = TextStreamer(tokenizer)
+      model = AutoModelForCausalLM.from_pretrained(model, device_map="auto", quantization_config=quant_config)
+      outputs = model.generate(inputs, max_new_tokens=80, streamer=streamer)
+      del model, inputs, tokenizer, outputs, streamer
+      gc.collect()
+      torch.cuda.empty_cache()
+
+generate(PHI3, messages)
 
 ## Hugging Face Transformers
 
