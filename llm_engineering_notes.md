@@ -396,7 +396,7 @@ AutoTokenizer with:
 - LLAMA 3.1 Model
 - PHI3 (Microsoft)
 - QWEN2 (Alibaba Cloud)
-- Starcoder2 (ServiceNow/HuggingFace/Nvidia)
+- Starcoder2 from BigCode (ServiceNow + HuggingFace + NVidia)
 
 ![alt text](image-26.png)
 
@@ -517,6 +517,24 @@ An **A100 box** refers to a **server or workstation that is equipped with one or
 - In cloud computing:
 > Providers offer VM instances named after A100, sometimes called "A100 boxes".
 >
+
+## Instruct variants of models (Chat)
+
+Many models have a variant that has been trained for use in Chats.
+These are typically labelled with the word "Instruct" at the end.
+They have been trained to expect prompts with a particular format that includes system, user and assistant prompts.
+
+There is a utility method apply_chat_template that will convert from the messages list format we are familiar with, into the right input prompt for this model.
+
+tokenizer = AutoTokenizer.from_pretrained('meta-llama/Meta-Llama-3.1-8B-Instruct', trust_remote_code=True)
+
+messages = [
+    {"role": "system", "content": "You are a helpful assistant"},
+    {"role": "user", "content": "Tell a light-hearted joke for a room of Data Scientists"}
+  ]
+
+prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+print(prompt)
 
 
 ## Fine tuning
