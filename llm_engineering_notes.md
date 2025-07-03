@@ -350,6 +350,8 @@ A core [Transformers Library](https://huggingface.co/docs/transformers/index) fo
 - Simplifies inference and training for a wide range of NLP and other tasks.
 - Supports PyTorch, TensorFlow, and JAX.
 
+The Hugging Face transformers library is an incredibly versatile and powerful tool for natural language processing. It allows users to perform a wide range of tasks such as text classification, named entity recognition, and question answering.
+
 ## 4. **PEFT (Parameter-Efficient Fine-Tuning)**
 **What is it?**
 A library and suite of methods to fine-tune big models efficiently by updating only a small subset of parameters (using methods such as LoRA and prompt tuning).
@@ -451,6 +453,26 @@ The pipelines API in HuggingFace is only for use for inference - running a model
 I recorded this playlist on YouTube with more on parameters, training and inference:
 https://www.youtube.com/playlist?list=PLWHe-9GP9SMMdl6SLaovUQF2abiLGbMjs
 
+## Hugging Faces Pipelines
+
+Here are all the pipelines available from Transformers and Diffusers.
+
+With thanks to student Lucky P for suggesting I include this!
+
+There's a list pipelines under the Tasks on this page (you have to scroll down a bit, then expand the parameters to see the Tasks):
+
+https://huggingface.co/docs/transformers/main_classes/pipelines
+
+There's also this list of Tasks for Diffusion models instead of Transformers, following the image generation example where I use DiffusionPipeline above.
+
+https://huggingface.co/docs/diffusers/en/api/pipelines/overview
+
+If you come up with some cool examples of other pipelines, please share them with me! It's wonderful how HuggingFace makes this advanced AI functionality available for inference with such a simple API.
+
+- **Transformers** in Hugging Face are mainly for text-based tasks and use attention mechanisms.
+- **Diffusers** in Hugging Face are for generative tasks (e.g., image generation) and use diffusion processes.
+
+Both are supported by dedicated Hugging Face libraries but are intended for different model architectures and use cases.
 
 ## Hardware
 A **T4 box** typically refers to a **server or workstation equipped with NVIDIA T4 GPUs** (Tensor Core GPUs). The NVIDIA T4 is a widely used graphics processing unit designed for both inference and training tasks in machine learning, deep learning, and high-performance computing.
