@@ -622,6 +622,11 @@ An **A100 box** refers to a **server or workstation that is equipped with one or
 > Providers offer VM instances named after A100, sometimes called "A100 boxes".
 >
 
+## TODO
+- Just finished week3-day 5 exercise (models)
+- Next: meeting minutes creator
+- Week 4 DAy 1
+
 ## Fine tuning
 
 ## Tensor Flow
