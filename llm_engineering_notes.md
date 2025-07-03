@@ -398,8 +398,6 @@ AutoTokenizer with:
 
 ![alt text](image-26.png)
 
-**TODO**: Inference tasks??
-
 ## Hugging Face Models
 - Running inference on open-source models
 - Quantization (reducing weights of models)
@@ -421,6 +419,83 @@ Library bits & bytes:
   - bnb_4bit_quant_type="nf4" (normalize the 4 bits)
 
 ## Hugging Face Transformers
+
+The HuggingFace transformers library provides APIs at two different levels.
+
+The High Level API for using open-source models for typical inference tasks is called "pipelines". It's incredibly easy to use.
+
+You create a pipeline using something like:
+
+my_pipeline = pipeline("the_task_I_want_to_do")
+
+Followed by
+
+result = my_pipeline(my_input)
+
+## Inference
+
+You may already know this, but just in case you're not familiar with the word "inference" that I use here:
+
+When working with Data Science models, you could be carrying out 2 very different activities: training and inference.
+
+1. Training
+Training is when you provide a model with data for it to adapt to get better at a task in the future. It does this by updating its internal settings - the parameters or weights of the model. If you're Training a model that's already had some training, the activity is called "fine-tuning".
+
+2. Inference
+Inference is when you are working with a model that has already been trained. You are using that model to produce new outputs on new inputs, taking advantage of everything it learned while it was being trained. Inference is also sometimes referred to as "Execution" or "Running a model".
+
+All of our use of APIs for GPT, Claude and Gemini in the last weeks are examples of inference. The "P" in GPT stands for "Pre-trained", meaning that it has already been trained with data (lots of it!) In week 6 we will try fine-tuning GPT ourselves.
+
+The pipelines API in HuggingFace is only for use for inference - running a model that has already been trained. In week 7 we will be training our own model, and we will need to use the more advanced HuggingFace APIs that we look at in the up-coming lecture.
+
+I recorded this playlist on YouTube with more on parameters, training and inference:
+https://www.youtube.com/playlist?list=PLWHe-9GP9SMMdl6SLaovUQF2abiLGbMjs
+
+
+## Hardware
+A **T4 box** typically refers to a **server or workstation equipped with NVIDIA T4 GPUs** (Tensor Core GPUs). The NVIDIA T4 is a widely used graphics processing unit designed for both inference and training tasks in machine learning, deep learning, and high-performance computing.
+
+### Common Uses of a T4 Box:
+- **AI model training**
+- **Running inference (making predictions using pre-trained models)**
+- **Data analytics and processing**
+- **General GPU computing tasks**
+
+### Where you might see the term:
+- **Cloud providers** (like Google Cloud or AWS) may offer “T4 instances” or “T4 boxes”—virtual machines or physical servers with T4 GPUs installed.
+- **On-premises servers**: Sometimes, companies refer to their own servers with T4 GPUs as “T4 boxes.”
+
+### Key Features of NVIDIA T4:
+- Based on NVIDIA’s Turing architecture
+- 16GB GPU memory
+- Efficient for both FP16 (half-precision) and INT8 inference
+- Lower power consumption compared to many high-end GPUs
+
+---
+
+**Summary:**  
+A **T4 box** is a (physical or virtual) computer system equipped with NVIDIA T4 GPUs, mainly used for AI, deep learning, and data processing workloads.
+
+---
+
+An **A100 box** refers to a **server or workstation that is equipped with one or more NVIDIA A100 GPUs**.
+### What is an NVIDIA A100?
+- The **NVIDIA A100** is a high-end Tensor Core GPU designed for extremely demanding workloads such as:
+    - Training large AI and deep learning models
+    - Running inference on very large models
+    - High-performance computing (HPC)
+    - Data analytics
+
+### Where will you hear this term?
+- When discussing available hardware for AI or scientific workloads:
+> "We trained our model on a 4xA100 box."
+> (Meaning: a server with 4 NVIDIA A100 GPUs.)
+> 
+
+- In cloud computing:
+> Providers offer VM instances named after A100, sometimes called "A100 boxes".
+>
+
 
 ## Fine tuning
 
