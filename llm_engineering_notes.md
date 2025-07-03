@@ -401,10 +401,17 @@ AutoTokenizer with:
 ![alt text](image-26.png)
 
 ## Hugging Face Models
+
+Looking at the lower level API of Transformers - the models that wrap PyTorch code for the transformers themselves.
+**"The transformers themselves"** refers to the **transformer neural network architectures**. These are the core deep learning models that perform tasks such as natural language processing, translation, summarization, etc.
+"The models that wrap PyTorch code" refers to classes or wrappers that make it easier to use these architectures in PyTorch.
+
+
 - Running inference on open-source models
 - Quantization (reducing weights of models)
 - Model internals (peek at PyTorch layers -> transformers)
 - Streaming
+
 ![alt text](image-27.png)
 
 Quantization:
@@ -414,11 +421,41 @@ Quantization:
 - Can reduce to even 4 bit (half byte), it does not reduce accuracy as much as we would think!!
 
 Library bits & bytes:
-- BitsAndBytesConfig
-  - load_in_4bits=true (loads 4 bits only in memory)
-  - bnb_4bit_use_double_quant=true (quantizes twice)
-  - bnb_4bit_compute_dtype=torch.bfloat16 (syntax for performance)
-  - bnb_4bit_quant_type="nf4" (normalize the 4 bits)
+
+Quantization Config - this allows us to load the model into memory and use less memory
+
+    quant_config = BitsAndBytesConfig(
+      
+        load_in_4bit=True, (loads 4 bits only in memory)
+      
+        bnb_4bit_use_double_quant=True, (quantizes twice)
+      
+        bnb_4bit_compute_dtype=torch.bfloat16, (syntax for performance)
+      
+        bnb_4bit_quant_type="nf4" (normalize the 4 bits)
+    )
+
+Note lab Week 3 Day 4 - models.ipynb:
+
+I've added some new material in the middle of this lab to get more intuition on what a Transformer actually is. Later in the course, when we fine-tune LLMs, you'll get a deeper understanding of this.
+
+## Instruct variants of models (Chat)
+
+Many models have a variant that has been trained for use in Chats.
+These are typically labelled with the word "Instruct" at the end.
+They have been trained to expect prompts with a particular format that includes system, user and assistant prompts.
+
+There is a utility method apply_chat_template that will convert from the messages list format we are familiar with, into the right input prompt for this model.
+
+tokenizer = AutoTokenizer.from_pretrained('meta-llama/Meta-Llama-3.1-8B-Instruct', trust_remote_code=True)
+
+messages = [
+    {"role": "system", "content": "You are a helpful assistant"},
+    {"role": "user", "content": "Tell a light-hearted joke for a room of Data Scientists"}
+  ]
+
+prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+print(prompt)
 
 ## Hugging Face Transformers
 
@@ -517,25 +554,6 @@ An **A100 box** refers to a **server or workstation that is equipped with one or
 - In cloud computing:
 > Providers offer VM instances named after A100, sometimes called "A100 boxes".
 >
-
-## Instruct variants of models (Chat)
-
-Many models have a variant that has been trained for use in Chats.
-These are typically labelled with the word "Instruct" at the end.
-They have been trained to expect prompts with a particular format that includes system, user and assistant prompts.
-
-There is a utility method apply_chat_template that will convert from the messages list format we are familiar with, into the right input prompt for this model.
-
-tokenizer = AutoTokenizer.from_pretrained('meta-llama/Meta-Llama-3.1-8B-Instruct', trust_remote_code=True)
-
-messages = [
-    {"role": "system", "content": "You are a helpful assistant"},
-    {"role": "user", "content": "Tell a light-hearted joke for a room of Data Scientists"}
-  ]
-
-prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-print(prompt)
-
 
 ## Fine tuning
 
