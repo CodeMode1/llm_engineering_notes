@@ -711,6 +711,10 @@ An **A100 box** refers to a **server or workstation that is equipped with one or
 ![alt text](image-36.png)
 ![alt text](image-37.png)
 
+## Hugging Face Endpoints Explored
+
+![alt text](image-38.png)
+
 ## Fine-tuning
 
 
