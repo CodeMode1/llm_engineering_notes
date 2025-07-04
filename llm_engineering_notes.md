@@ -28,6 +28,25 @@
 
 • **Level up your AI and LLM engineering skills** to be at the forefront of the industry.
 
+---
+
+*Section1*: Build your first LLM Product: Exploring Top Models & Transformers
+
+*Section2*: Build a Multi-Modal Chatbot: LLMs, Gradio UI, and Agents in Action
+
+*Section3*: Open-Source Gen AI: Building Automated Solutions with HuggingFace
+
+*Section4*: LLM Showdown: Evaluating Models for Code Generation & Business Tasks
+
+*Section5*: Mastering RAG: Build Advanced Solutions With Vector Embeddings & LangChain
+
+*Section6*: Fine-tuning Frontier Large Language Models with LoRA/QLoRa
+
+*Section7*: Fine-tuned open-source model to compete with Frontier in price prediction.
+
+*Section8*: Build Autonomous multi agent system collaborating with models
+
+
 ## 📝 Key Concepts
 
 ### 1. Frontier LLM
@@ -132,6 +151,29 @@ Offering you to choose between closed-source or open-source models.
 
 - Using google collab -> running in the cloud for power
 - Using Ollama to run locally (optimized using C++ - CPP)
+
+
+#### Inference
+
+You may already know this, but just in case you're not familiar with the word "inference" that I use here:
+
+When working with Data Science models, you could be carrying out 2 very different activities: training and inference.
+
+1. Training
+Training is when you provide a model with data for it to adapt to get better at a task in the future. It does this by updating its internal settings - the parameters or weights of the model. If you're Training a model that's already had some training, the activity is called "fine-tuning".
+
+2. Inference
+Inference is when you are working with a model that has already been trained. You are using that model to produce new outputs on new inputs, taking advantage of everything it learned while it was being trained. Inference is also sometimes referred to as "Execution" or "Running a model".
+
+All of our use of APIs for GPT, Claude and Gemini in the last weeks are examples of inference. The "P" in GPT stands for "Pre-trained", meaning that it has already been trained with data (lots of it!) In week 6 we will try fine-tuning GPT ourselves.
+
+The pipelines API in HuggingFace is only for use for inference - running a model that has already been trained. In week 7 we will be training our own model, and we will need to use the more advanced HuggingFace APIs that we look at in the up-coming lecture.
+
+I recorded this playlist on YouTube with more on parameters, training and inference:
+https://www.youtube.com/playlist?list=PLWHe-9GP9SMMdl6SLaovUQF2abiLGbMjs
+
+**Generative AI** refers to a class of artificial intelligence algorithms designed to create new content, such as text, images, music, or code. These models learn patterns from large datasets and use them to generate outputs that resemble human-created data.
+Common examples include language models like GPT (which generate text), image generators like DALL-E or Stable Diffusion, and music generators. The primary goal of generative AI is to produce realistic and original content automatically, often in response to a prompt or instruction.
 
 ### 5. Key knowledge
 
@@ -538,24 +580,55 @@ Followed by
 
 result = my_pipeline(my_input)
 
-## Inference
+### Transformers Tokenizers & Models example
 
-You may already know this, but just in case you're not familiar with the word "inference" that I use here:
+Excerpt (full example here: https://colab.research.google.com/drive/1KSMxOCprsl1QRpt_Rq0UqCAyMtPqDQYx?usp=sharing#scrollTo=FW8nl3XRFrz0):
 
-When working with Data Science models, you could be carrying out 2 very different activities: training and inference.
+    import os
+    import requests
+    from IPython.display import Markdown, display, update_display
+    from openai import OpenAI
+    from google.colab import drive
+    from huggingface_hub import login
+    from google.colab import userdata
+    from transformers import AutoTokenizer, AutoModelForCausalLM, TextStreamer, BitsAndBytesConfig
+    import torch
 
-1. Training
-Training is when you provide a model with data for it to adapt to get better at a task in the future. It does this by updating its internal settings - the parameters or weights of the model. If you're Training a model that's already had some training, the activity is called "fine-tuning".
+    ... mount folder with mp3 to drive ...
 
-2. Inference
-Inference is when you are working with a model that has already been trained. You are using that model to produce new outputs on new inputs, taking advantage of everything it learned while it was being trained. Inference is also sometimes referred to as "Execution" or "Running a model".
+    Use the Whisper OpenAI model to convert the Audio to Text
+    If you'd prefer to use an Open Source model, class student Youssef has contributed an open 
+    source version which I've added to the bottom of this colab
 
-All of our use of APIs for GPT, Claude and Gemini in the last weeks are examples of inference. The "P" in GPT stands for "Pre-trained", meaning that it has already been trained with data (lots of it!) In week 6 we will try fine-tuning GPT ourselves.
+    audio_file = open(audio_filename, "rb")
+    transcription = openai.audio.transcriptions.create(model=AUDIO_MODEL, file=audio_file, response_format="text")
+    print(transcription)
 
-The pipelines API in HuggingFace is only for use for inference - running a model that has already been trained. In week 7 we will be training our own model, and we will need to use the more advanced HuggingFace APIs that we look at in the up-coming lecture.
+    system_message = "You are an assistant that produces minutes of meetings from transcripts, with summary, key discussion points, takeaways and action items with owners, in markdown."
+    user_prompt = f"Below is an extract transcript of a Denver council meeting. Please write minutes in markdown, including a summary with attendees, location and date; discussion points; takeaways; and action items with owners.\n{transcription}"
 
-I recorded this playlist on YouTube with more on parameters, training and inference:
-https://www.youtube.com/playlist?list=PLWHe-9GP9SMMdl6SLaovUQF2abiLGbMjs
+    messages = [
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": user_prompt}
+    ]
+
+    quant_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_use_double_quant=True,
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_quant_type="nf4"
+    )
+
+    tokenizer = AutoTokenizer.from_pretrained(LLAMA)
+    tokenizer.pad_token = tokenizer.eos_token
+    inputs = tokenizer.apply_chat_template(messages, return_tensors="pt").to("cuda")
+    streamer = TextStreamer(tokenizer)
+    model = AutoModelForCausalLM.from_pretrained(LLAMA, device_map="auto", quantization_config=quant_config)
+    outputs = model.generate(inputs, max_new_tokens=2000, streamer=streamer)
+
+    response = tokenizer.decode(outputs[0])
+
+    display(Markdown(response))
 
 ## Hugging Faces Pipelines
 
@@ -622,10 +695,7 @@ An **A100 box** refers to a **server or workstation that is equipped with one or
 > Providers offer VM instances named after A100, sometimes called "A100 boxes".
 >
 
-## TODO
-- Just finished week3-day 5 exercise (models)
-- Next: meeting minutes creator
-- Week 4 DAy 1
+## Evaluating Models for Code Generation & Business Tasks
 
 ## Fine tuning
 
