@@ -697,7 +697,21 @@ An **A100 box** refers to a **server or workstation that is equipped with one or
 
 ## Evaluating Models for Code Generation & Business Tasks
 
-## Fine tuning
+- Discuss how to select the right LLM for the task
+- Compare LLMs based on their basic attributes and benchmarks
+- Use the Open LLM Leaderboard to evaluate LLMs
+
+![alt text](image-28.png)
+![alt text](image-29.png)
+![alt text](image-30.png)
+![alt text](image-31.png)
+![alt text](image-33.png)
+![alt text](image-34.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
+![alt text](image-37.png)
+
+## Fine-tuning
 
 ## Tensor Flow
 
