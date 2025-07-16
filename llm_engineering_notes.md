@@ -198,7 +198,6 @@ I followed Part 2B - Alternative to Part 2.
 From within the llm_engineering folder in a Windows Terminal, run:
 
 - Activate the environment:
-
   - venv\Scripts\activate
 
 - Start jupyter lab:
