@@ -581,6 +581,18 @@ result = my_pipeline(my_input)
 
 ### Transformers Tokenizers & Models example
 
+🧠 Basic LLM Inference Pipeline
+The rough process is:
+- User Input (e.g. "What is the capital of France?")
+- Tokenization: Input is broken into tokens (subwords or characters, depending on the tokenizer used — like Byte-Pair Encoding or SentencePiece).
+- Tokens → Embeddings: Each token is mapped to a high-dimensional vector (embedding) using a learned embedding matrix.
+- Model Processing: The transformer processes the embeddings through layers of attention and MLPs.
+- Output Tokens: The model generates output tokens, which are then converted back to text.
+
+🔍 Where Does Vector Search Come In?  
+Short Answer: A vector database (like Pinecone, Weaviate, FAISS) is not part of the core LLM model. It becomes relevant when you're using retrieval-based methods, like RAG (Retrieval-Augmented Generation).   
+So in plain LLM usage, there's no vector DB.
+
 Excerpt (full example here: https://colab.research.google.com/drive/1KSMxOCprsl1QRpt_Rq0UqCAyMtPqDQYx?usp=sharing#scrollTo=FW8nl3XRFrz0):
 
     import os
@@ -720,6 +732,66 @@ Called Inference Endpoints
 
 ## Model-Centric vs Business-Centric Metrics
 ![alt text](image-39.png)
+
+## RAG (Retrieval-Augmented Generation)
+- RAG is perhaps the most immediately applicable technique of anything that we cover in the course! In fact, there are commercial products that do precisely what we build this week: nuanced querying across large databases of information, such as company contracts or product specs. RAG gives you a quick-to-market, low cost mechanism for adapting an LLM to your business area.
+- It requires exact text matching!
+
+## RAG - Vector Embeddings (key to RAG and LLM Retrieval)
+
+### 🔁 How Tokens & Vector Search Work Together in RAG
+When you do use RAG, here’s how it fits into the flow:
+- RAG Flow:
+Input Prompt → You take a user query, e.g. "Explain Einstein's theory of relativity"
+- Embed Query → Convert query into a vector using an embedding model (can be the LLM’s encoder or a separate model like OpenAI's text-embedding-3-small)
+- Vector Search → Query that vector in a vector DB of pre-embedded documents (text chunks)
+- Top-K Retrieval → Get back N relevant chunks
+- Augment Prompt → Combine those chunks with the original prompt to build something like:
+
+```texmate
+Context: [retrieved chunks...]  
+Question: Explain Einstein's theory of relativity
+```
+- Send to LLM → LLM now answers using both original question and retrieved data.
+
+📌 So:
+- Tokenization is separate from vector search.
+- The vector search happens before the final LLM prompt.
+- Tokens enter the model after the retrieved data is injected.
+
+### 🗃️ Is Vector Search Always Used?  
+No. Vector databases are only used when:
+- You implement a RAG or retrieval system.
+- You want the LLM to access a custom knowledge base beyond its training.
+
+In pure LLM API calls (like ChatGPT out of the box), there's no vector DB involved unless you use tools or extensions like:
+- OpenAI’s Assistants API with retrieval
+- LangChain / LlamaIndex
+- Your own RAG stack
+
+### 🔍 Retrieval vs RAG: Are They the Same?  
+Not exactly. Here’s the nuance:
+| Term              | What it Means                                                                   |
+| ----------------- | ------------------------------------------------------------------------------- |
+| **Retrieval**     | Any process of looking up relevant docs/snippets from a knowledge source.       |
+| **RAG**           | A **specific architecture** that combines **retrieval** + **generation** (LLM). |
+| **LLM Retrieval** | Can refer to the built-in knowledge in the LLM (e.g., pretraining corpus).      |
+
+🔹 So retrieval is a component, and RAG is the overall strategy (retrieval + generation).
+
+✅ Summary
+- ✅ Tokens are the format the LLM actually consumes — they’re separate from vectors used in retrieval.
+- ✅ Vector DBs are used in retrieval systems (like RAG), not inside the LLM model itself.
+- ✅ RAG = Retrieval + Augmented Generation. It’s an external system that enhances the LLM with custom data.
+- ✅ LLM retrieval can mean: either what’s retrieved from vector DBs, or from the LLM’s own weights — so context matters.
+
+![alt text](image-41.png)
+
+Example of auto-regressive encoding: Pipeline API of Transformers framework (Hugging Face)
+
+![alt text](image-42.png)
+
+![alt text](image-43.png)
 
 ## Fine-tuning
 
