@@ -714,7 +714,12 @@ An **A100 box** refers to a **server or workstation that is equipped with one or
 
 ![alt text](image-38.png)
 
-##
+Called Inference Endpoints
+
+![alt text](image-40.png)
+
+## Model-Centric vs Business-Centric Metrics
+![alt text](image-39.png)
 
 ## Fine-tuning
 
