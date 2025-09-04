@@ -897,3 +897,4 @@ This is actually a 1.5B variant of Qwen that has been fine-tuned using synethic 
 Other sizes of DeepSeek are here all the way up to the full 671B parameter version, which would use up 404GB of your drive and is far too large for most!
 
 ## Open-Source Contribution to make
+- A LLM that will scan a receipt, extract payment and identification infos then return them to the consumer.
